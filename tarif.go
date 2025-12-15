@@ -3,15 +3,11 @@ package main
 import "fmt"
 
 func main() {
-	// DATA UTAMA
-	// Kita simpan nama kota dan posisi KM di dua daftar terpisah
-	// Supaya kodenya tidak terlihat rumit
 	namaKota := []string{"Ngawi", "Madiun", "Nganjuk", "Mojokerto", "Surabaya", "Malang"}
 	posisiKM := []int{579, 603, 647, 712, 745, 790}
 
 	// 1. TAMPILKAN MENU (List Menurun)
 	fmt.Println("=== DAFTAR GERBANG TOL ===")
-	// Kita pakai perulangan (loop) untuk mencetak daftar ke bawah
 	for i := 0; i < len(namaKota); i++ {
 		// %d = angka urut, %s = nama kota
 		fmt.Printf("%d. %s\n", i+1, namaKota[i])
@@ -26,18 +22,14 @@ func main() {
 	fmt.Print("Nomor Gerbang Keluar: ")
 	fmt.Scan(&keluar)
 
-	// Cek apakah nomor yang dimasukkan benar
-	// Angka tidak boleh kurang dari 1 atau lebih dari jumlah kota (6)
 	if masuk < 1 || masuk > 6 || keluar < 1 || keluar > 6 {
-		fmt.Println("Error: Nomor gerbang tidak ada!")
+		fmt.Println("\nError: Nomor gerbang tidak ada!")
 		return
 	}
 
 	// 3. HITUNG JARAK
-	// Ambil KM dari daftar 'posisiKM'. Ingat, komputer mulai hitung dari 0, jadi kita kurangi 1.
 	jarak := posisiKM[keluar-1] - posisiKM[masuk-1]
 
-	// Jika hasilnya minus (karena balik arah), ubah jadi positif
 	if jarak < 0 {
 		jarak = -jarak
 	}
@@ -56,10 +48,12 @@ func main() {
 		hargaPerKM = 1000
 	} else if golongan == 2 {
 		hargaPerKM = 1500
-	} else {
+	} else if golongan == 3 {
 		hargaPerKM = 2000
+	} else {
+		fmt.Println("\nError: Golongan tidak valid!")
+		return
 	}
-
 	totalHarga := jarak * hargaPerKM
 
 	// 5. PEMBAYARAN
@@ -76,7 +70,6 @@ func main() {
 		fmt.Println("===============================")
 		fmt.Println("      STRUK TRANSAKSI TOL      ")
 		fmt.Println("===============================")
-		// Mengambil nama kota dari daftar 'namaKota'
 		fmt.Printf("Asal      : %s\n", namaKota[masuk-1])
 		fmt.Printf("Tujuan    : %s\n", namaKota[keluar-1])
 		fmt.Printf("Jarak     : %d KM\n", jarak)
